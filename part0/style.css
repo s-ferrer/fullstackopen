@@ -51,7 +51,7 @@ form li + li {
   margin-top: 1em;
 }
 
-label
+label {
   display: inline-block;
   width: 90px;
   text-align: right;

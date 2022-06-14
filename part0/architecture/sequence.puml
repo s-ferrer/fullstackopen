@@ -1,0 +1,27 @@
+@startuml Fullstackopen part0
+actor User
+participant "Web app" as A
+participant "Form" as B
+participant "Button" as C
+participant "Notes app" as D
+
+
+User -> A: user creates a new note on page
+activate A
+
+User -> B: click the submit button
+activate B
+
+User -> A: goes to single page app version of the notes app
+activate D
+
+User -> B: creates a new note using the single page version of the app
+activate A
+
+User -> B: click the submit button
+activate B
+
+B --> B: The action ends
+deactivate B
+
+@enduml
