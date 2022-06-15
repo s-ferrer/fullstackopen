@@ -1,38 +1,31 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 
-const Header = (props) => {
-  return <h1>{props.course}</h1>;
-};
+const Header = ({ course }) => <h1>{course}</h1>;
 
-const Part = (props) => {
-  return (
-    <p>
-      {props.part} {props.exercises}
-    </p>
-  );
-};
+const Part = ({ name, exercises }) => (
+  <p>
+    {name}: {exercises}
+  </p>
+);
 
-const Content = (props) => {
+const Content = ({ parts }) => {
+  const [part1, part2, part3] = parts;
   return (
     <div>
-      <Part part={props.parts[0].name} exercises={props.part[0].exercises} />
-      <Part part={props.parts[1].name} exercises={props.part[1].exercises} />
-      <Part part={props.parts[2].name} exercises={props.part[2].exercises} />
+      <Part name={part1.name} exercises={part1.exercises} />
+      <Part name={part2.name} exercises={part2.exercises} />
+      <Part name={part3.name} exercises={part3.exercises} />
     </div>
   );
 };
 
-const Total = (props) => {
-  return (
-    <p>
-      Number of exercises{" "}
-      {props.parts[0].exercises +
-        props.parts[1].exercises +
-        props.parts[2].exercises}
-    </p>
-  );
+const Total = ({ parts }) => {
+  const total = parts.reduce((total, part) => total + part.exercises, 0);
+
+  return <div>Total exercises: {total}</div>;
 };
+
 const App = () => {
   const course = {
     name: "Half Stack application development",
@@ -46,11 +39,12 @@ const App = () => {
         exercises: 7,
       },
       {
-        name: "State of component",
+        name: "State of a component",
         exercises: 14,
       },
     ],
   };
+
   return (
     <div>
       <Header course={course.name} />
